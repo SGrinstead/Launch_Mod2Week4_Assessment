@@ -8,6 +8,8 @@
 ## Questions (8 points possible)
 1. In your own words, how would you define an ORM?
 
+An Object Relational Mapping is a type of framework that connects the classes in your program to a database.
+
 2. Given the two classes for bike and owner, update the classes to include a one-to-many relationship where each bike has one owner, and each owner can have many bikes.
 
     ```C#
@@ -18,6 +20,7 @@
             public int Id { get; set; }
             public string Type { get; set; }
             public DateTime PurchaseDate { get; set; }
+            public Owner Owner { get; set; }
         }
     }
 
@@ -28,11 +31,14 @@
             public int Id { get; set; }
             public string Name { get; set; }
             public int Zipcode { get; set; }
+            public List<Bike> Bikes { get; set; } = new List<Bike>();
         }
     }
     ```
 
 3. When adding a new pizza table to our database, which of the following two commands would we run first? Why is it important to run these two line in that order?
+
+We first run the add-migration command. This finds all of the changes to make to the database to support our class structure. If we update the database first, it won't save any of these changes to the database.
     ```
     add-migration AddPizzaTable
     ```
@@ -44,6 +50,8 @@
     * What will the table name be?
     * What will the column name(s) be?
     * What is the name of the database you are connecting to?
+
+the database name will be Bikes, the table name will be bikes, and the columns will be named id, type, and date
 
     ```C#
     namespace BikeApp
@@ -66,7 +74,7 @@
     }
     ```
 
-5. What type of data does the `Contains` LINQ method return?
+5. What type of data does the `Contains` LINQ method return? C, boolean
     <br> a. String 
     <br> b. Integer 
     <br> c. Boolean
